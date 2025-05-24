@@ -1,0 +1,1386 @@
+/* グローバルなスタイル */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f0f2f5; /* 全体の背景色 */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* レイアウト関連 */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 画面全体の高さを保証 */
+}
+
+.main-content {
+    display: flex;
+    flex: 1; /* 残りのスペースを埋める */
+}
+
+.content-area {
+    flex: 1;
+    padding: 20px;
+    margin-left: 250px; /* サイドバーの幅に合わせてメインコンテンツをずらす */
+    background-color: #f0f2f5;
+    /* ヘッダーの高さ分、上部にパディングを追加することで、コンテンツがヘッダーの下に隠れないようにする */
+    padding-top: 80px; /* ヘッダーの高さ+α (例: 60px + 20px) */
+}
+
+
+/* ヘッダー */
+.header {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* ヘッダーを画面上部に固定 */
+    top: 0;
+    left: 250px; /* サイドバーの幅だけ右にずらす */
+    width: calc(100% - 250px); /* 画面幅からサイドバーの幅を引く */
+    z-index: 500;
+}
+
+.header h1 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+}
+
+/* ログアウトボタン */
+.header .logout-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    transition: background-color 0.3s ease;
+}
+
+.header .logout-btn:hover {
+    background-color: #c0392b;
+}
+
+/* サイドバー */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50; /* 濃いグレー */
+    color: white;
+    padding-top: 20px;
+    position: fixed; /* サイドバーを固定 */
+    height: 100vh; /* 全体の高さ */
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 400; /* ヘッダーより下 */
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav li {
+    margin-bottom: 5px;
+}
+
+.sidebar-item {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-item:hover {
+    background-color: #34495e; /* 少し明るいグレー */
+}
+
+.sidebar-item.active {
+    background-color: #3498db; /* アクティブな青 */
+    font-weight: bold;
+}
+
+/* ログイン画面のスタイル */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* ビューポートの高さ全体を使う */
+    width: 100%; /* 親要素の幅いっぱいに広げる */
+    background-color: #ffffff; /* ログイン画面の背景色も白に */
+    box-sizing: border-box; /* paddingを含めて幅を計算 */
+    padding: 20px; /* 必要に応じて、画面端からの余白を追加 */
+}
+
+.login-box {
+    background-color: #ffffff;
+    padding: 40px; /* パディングを調整して内容を大きく見せる */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* 最大幅を増やして全体を大きくする */
+    text-align: center;
+    box-sizing: border-box; /* paddingを含めて幅を計算 */
+}
+
+.login-box h1 {
+    color: #2c3e50;
+    margin-bottom: 40px; /* マージンを増やして間隔を広げる */
+    font-size: 32px; /* 文字サイズを大きく */
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #34495e;
+    font-weight: bold;
+    font-size: 16px; /* ラベルの文字サイズを大きく */
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 15px 20px; /* 入力フィールドのパディングを増やして大きく見せる */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px; /* 入力文字サイズを大きく */
+    box-sizing: border-box; /* paddingを含めて幅を計算 */
+}
+
+.input-group input[type="text"]:focus,
+.input-group input[type="password"]:focus {
+    border-color: #1abc9c;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.2);
+}
+
+.login-button {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 15px 30px; /* ボタンのパディングを増やして大きく見せる */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px; /* ボタンの文字サイズを大きく */
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* ボタンと入力フィールドの間に余白 */
+}
+
+.login-button:hover {
+    background-color: #16a085;
+}
+
+
+/* 課題管理画面 */
+.homework-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 課題作成ボタン */
+.create-homework-btn {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.create-homework-btn:hover {
+    background-color: #16a085;
+}
+
+.homework-list {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden; /* 角丸を適用するため */
+}
+
+.homework-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.homework-item:last-child {
+    border-bottom: none;
+}
+
+.homework-item h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 20px;
+}
+
+.homework-meta {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* 課題アクションボタン */
+.homework-actions {
+    display: flex; /* ボタンを横並びにする */
+    gap: 10px; /* ボタン間のスペース */
+    align-items: center; /* 垂直中央揃え */
+}
+
+.homework-actions button {
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    cursor: pointer;
+    border: none;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.homework-actions button.edit-btn { /* 新しいクラス名で詳細ボタンの色を明確に */
+    display: none; /* ← ここに 'display: none;' を追加しました */
+    background-color: #3498db;
+}
+
+.homework-actions button.edit-btn:hover {
+    background-color: #2980b9;
+}
+
+.homework-actions button.delete-btn {
+    background-color: #e74c3c;
+}
+
+.homework-actions button.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+
+/* 質問画面全般 */
+.questions-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 質問作成ボタン */
+.create-question-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.create-question-btn:hover {
+    background-color: #2980b9;
+}
+
+.question-list {
+    margin-top: 20px;
+}
+
+/* 質問アイテムのレイアウト調整 */
+.question-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s ease;
+    display: flex; /* Linkと削除ボタンを横並びにするため */
+    align-items: center; /* 垂直中央揃え */
+    justify-content: space-between; /* 両端寄せ */
+}
+
+.question-item:hover {
+    background-color: #eef;
+}
+
+.question-item-link {
+    flex-grow: 1; /* 残りのスペースを埋める */
+    padding-right: 15px; /* 削除ボタンとの間隔 */
+    cursor: pointer; /* Linkの部分のみカーソルをポインターにする */
+}
+
+.question-item-link:hover {
+    text-decoration: none; /* Linkのデフォルトの下線を消す */
+}
+
+
+.question-item h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #2c3e50;
+    font-size: 20px;
+}
+
+.question-meta {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.question-content-preview {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.question-attachment {
+    font-size: 14px;
+    color: #666;
+}
+
+.question-attachment a {
+    color: #3498db;
+    text-decoration: underline;
+}
+
+.question-attachment a:hover {
+    color: #2980b9;
+}
+
+
+/* 質問ステータスとアクションをまとめるコンテナ */
+.question-actions-right {
+    display: flex; /* Flexboxを適用 */
+    align-items: center; /* 垂直方向の中央揃え */
+    gap: 10px; /* ボタン間のスペース */
+    flex-shrink: 0; /* 縮まないようにする */
+}
+
+
+/* 質問ステータスバッジ */
+.question-status {
+    display: inline-block; /* 高さとline-heightの制御のため */
+    padding: 8px 15px; /* delete-btnと同じpaddingに調整 */
+    border-radius: 5px; /* delete-btnと同じborder-radiusに調整 */
+    font-size: 14px; /* delete-btnと同じfont-sizeに調整 */
+    font-weight: bold;
+    color: white;
+    white-space: nowrap; /* テキストが折り返さないように */
+    line-height: 1; /* ★追加: テキストの行の高さを明示的に設定して垂直方向の揃えを改善 */
+    vertical-align: middle; /* ★追加: 他のinline要素との垂直方向の揃えを調整 */
+}
+
+.question-status-detail { /* 詳細ページ用 */
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+}
+
+.status-unanswered {
+    background-color: #e74c3c; /* 赤 */
+}
+
+.status-answered {
+    background-color: #2ecc71; /* 緑 */
+}
+
+.question-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ステータスとタイトルを両端寄せ */
+    width: 100%; /* 親要素に幅を合わせる */
+}
+
+
+/* 質問投稿モーダル (不要になる可能性あり、フォームが直接表示されるため) */
+/* 今回は新しい質問フォームが直接表示されるため、Modal関連のスタイルは実質不要ですが、
+    もし再利用する予定がある場合は残しておいても構いません。
+    ただし、現時点での機能で使わない場合は削除してもOKです。 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* 他の要素の上に表示 */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 24px;
+    text-align: center;
+}
+
+.modal-content .input-group {
+    margin-bottom: 15px;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.modal-content input[type="text"],
+.modal-content textarea {
+    width: calc(100% - 22px); /* paddingを考慮 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* paddingを含めて幅を計算 */
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* モーダル内のボタン */
+.modal-actions .submit-btn,
+.modal-actions .cancel-btn,
+.modal-actions .delete-btn { /* delete-btnも追加 */
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    cursor: pointer;
+    border: none;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.modal-actions .submit-btn {
+    background-color: #1abc9c;
+}
+
+.modal-actions .submit-btn:hover {
+    background-color: #16a085;
+}
+
+.modal-actions .cancel-btn {
+    background-color: #95a5a6;
+}
+
+.modal-actions .cancel-btn:hover {
+    background-color: #7f8c8d;
+}
+
+.modal-actions .delete-btn { /* delete-btnのスタイル */
+    background-color: #e74c3c;
+}
+
+.modal-actions .delete-btn:hover {
+    background-color: #c0392b;
+}
+
+
+/* 質問詳細画面 */
+.question-detail-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #2980b9;
+}
+
+.question-detail-section h2 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.question-meta-detail {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* ステータスと投稿日の間隔 */
+}
+
+.question-content-box {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.question-content-box h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 20px;
+}
+
+.question-content-text {
+    margin: 0;
+}
+
+.question-attachment-display {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.question-attachment-display a {
+    color: #3498db;
+    text-decoration: underline;
+}
+
+.question-attachment-display a:hover {
+    color: #2980b9;
+}
+
+
+.answer-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.answer-section h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.answered-content-box {
+    background-color: #f0f8ff; /* 薄い青 */
+    border: 1px solid #d1e7fd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    line-height: 1.6;
+}
+
+.answered-text {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.answered-attachment {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.answered-attachment a {
+    color: #3498db;
+    text-decoration: underline;
+}
+
+.answered-attachment a:hover {
+    color: #2980b9;
+}
+
+.answer-form textarea {
+    width: 100%; /* 親要素に合わせて調整 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    min-height: 150px;
+    resize: vertical;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.answer-form .input-group {
+    margin-bottom: 15px;
+}
+
+.answer-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.answer-form input[type="file"] {
+    padding: 8px 0;
+    border: none;
+}
+
+/* 回答送信ボタン */
+.answer-form .submit-answer-btn {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    transition: background-color 0.3s ease;
+}
+
+.answer-form .submit-answer-btn:hover {
+    background-color: #16a085;
+}
+
+
+/* 資料画面全般 */
+.materials-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.upload-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.upload-section h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.upload-section form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.file-input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px 10px;
+    flex-grow: 1; /* 残りのスペースを埋める */
+}
+
+/* アップロードボタン */
+.upload-btn {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    transition: background-color 0.3s ease;
+}
+
+.upload-btn:hover:not(:disabled) {
+    background-color: #16a085;
+}
+
+.upload-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.selected-file-name {
+    font-size: 14px;
+    color: #555;
+    margin-left: 10px;
+}
+
+.material-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.material-list th, .material-list td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.material-list th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.material-list tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.material-list tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* ダウンロードボタン */
+.download-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-decoration: none; /* aタグのデフォルト下線を消す */
+    display: inline-block; /* ボタンのように見せる */
+    margin-right: 8px; /* 削除ボタンとの間隔 */
+    text-align: center; /* テキストを中央揃え */
+    transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+    background-color: #2980b9;
+}
+
+/* 削除ボタン（資料画面と質問詳細画面で共通） */
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* 質問一覧ページの削除ボタンのスタイル */
+.delete-question-btn { /* 新しく追加 */
+    display: none; /* ← ここを変更しました */
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    transition: background-color 0.3s ease;
+    margin-left: 10px; /* question-item-linkとの間隔 */
+    flex-shrink: 0; /* 縮まないようにする */
+    line-height: 1; /* ★追加: テキストの行の高さを明示的に設定して垂直方向の揃えを改善 */
+    vertical-align: middle; /* ★追加: 他のinline要素との垂直方向の揃えを調整 */
+}
+
+.delete-question-btn:hover {
+    background-color: #c0392b;
+}
+
+
+/* カレンダーセクション */
+.calendar-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-controls h2 {
+    margin: 0;
+    font-size: 28px;
+    color: #2c3e50;
+}
+
+/* カレンダー操作ボタン */
+.calendar-controls button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    transition: background-color 0.3s ease;
+}
+
+.calendar-controls button:hover {
+    background-color: #2980b9;
+}
+
+/* イベント追加ボタン */
+.add-event-btn {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.add-event-btn:hover {
+    background-color: #16a085;
+}
+
+/* カレンダーグリッド */
+.calendar {
+    width: 100%;
+}
+
+.calendar-grid-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-bottom: none;
+}
+
+.day-of-week {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    border-right: 1px solid #eee;
+}
+
+.day-of-week:last-child {
+    border-right: none;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+.calendar-cell {
+    border: 1px solid #eee;
+    min-height: 120px; /* セルの最小高さ */
+    padding: 5px;
+    box-sizing: border-box;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.calendar-cell.today {
+    border: 2px solid #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+.calendar-cell.other-month {
+    background-color: #f8f8f8;
+    color: #bbb;
+}
+
+.date-number {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+    padding-right: 5px;
+    margin-bottom: 5px;
+}
+
+.calendar-cell.other-month .date-number {
+    color: #bbb;
+}
+
+.events-list {
+    margin-top: 5px;
+}
+
+.calendar-event-item {
+    background-color: #3498db; /* デフォルト色 */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.85em;
+    margin-bottom: 3px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.calendar-event-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* モーダル (質問画面と同じスタイルを共有) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 24px;
+    text-align: center;
+}
+
+.modal-content .input-group {
+    margin-bottom: 15px;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="date"],
+.modal-content input[type="time"],
+.modal-content textarea,
+.modal-content input[type="color"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* 日付と時間の入力フィールドを並べる */
+.modal-content .input-group input[type="date"],
+.modal-content .input-group input[type="time"] {
+    width: calc(50% - 15px); /* 隙間を考慮して調整 */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.modal-content .input-group input[type="date"] + input[type="time"] {
+    margin-left: 10px;
+}
+
+
+.modal-content textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* カレンダーモーダルアクションボタン */
+.modal-actions .submit-btn,
+.modal-actions .delete-btn,
+.modal-actions .cancel-btn {
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    cursor: pointer;
+    border: none;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.modal-actions .submit-btn {
+    background-color: #1abc9c;
+}
+
+.modal-actions .submit-btn:hover {
+    background-color: #16a085;
+}
+
+.modal-actions .delete-btn {
+    background-color: #e74c3c;
+}
+
+.modal-actions .delete-btn:hover {
+    background-color: #c0392b;
+}
+
+
+.modal-actions .cancel-btn {
+    background-color: #95a5a6;
+}
+
+.modal-actions .cancel-btn:hover {
+    background-color: #7f8c8d;
+}
+
+/* 祝日表示 */
+.calendar-cell.holiday {
+    background-color: #fde9e7; /* 薄いピンク */
+}
+
+.calendar-cell.holiday .date-number {
+    color: #e74c3c; /* 赤っぽい色 */
+}
+
+.holiday-name {
+    font-size: 0.75em;
+    color: #e74c3c;
+    text-align: center;
+    margin-top: 2px;
+}
+
+/* 課題作成画面のセクション */
+.homework-creation-section {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* 適切な最大幅を設定 */
+    margin: 20px auto; /* 中央寄せ */
+}
+
+.homework-creation-section h2 {
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.homework-creation-section .input-group {
+    margin-bottom: 20px;
+}
+
+.homework-creation-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #34495e;
+    font-size: 1.1em;
+}
+
+.homework-creation-section input[type="text"],
+.homework-creation-section input[type="date"],
+.homework-creation-section textarea,
+.homework-creation-section select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.homework-creation-section textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* 選択肢形式の追加 */
+.choice-input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.choice-input-group input[type="text"] {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+/* 選択肢削除ボタン */
+.remove-choice-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    line-height: 1; /* ボタンの文字高さを調整 */
+    transition: background-color 0.3s ease;
+}
+
+.remove-choice-btn:hover {
+    background-color: #c0392b;
+}
+
+/* 選択肢追加ボタン */
+.add-choice-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.add-choice-btn:hover {
+    background-color: #2980b9;
+}
+
+/* 添付ファイル */
+.homework-creation-section input[type="file"] {
+    padding: 8px 0; /* ファイル入力フィールドのパディング調整 */
+    border: none; /* デフォルトのボーダーを削除 */
+}
+
+.selected-file-name {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+}
+
+
+/* フォームアクションボタン（課題作成画面） */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.form-actions .submit-btn,
+.form-actions .cancel-btn {
+    padding: 12px 20px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* フォントサイズを統一 */
+    min-width: 100px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    border: none;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.form-actions .submit-btn:hover {
+    background-color: #16a085;
+}
+
+.form-actions .submit-btn {
+    background-color: #1abc9c;
+}
+
+.form-actions .cancel-btn {
+    background-color: #95a5a6;
+}
+
+.form-actions .cancel-btn:hover {
+    background-color: #7f8c8d;
+}
+
+/* ラジオボタンのラベルとインプットを横並びにする */
+.input-group > div > label {
+    display: inline-flex; /* インプットとラベルを横並びに */
+    align-items: center; /* 垂直中央揃え */
+    margin-right: 15px; /* ラジオボタン間のスペース */
+    font-weight: normal; /* ラジオボタンラベルは太字にしない */
+    font-size: 1em; /* 親のラベルより少し小さく */
+}
+
+.input-group > div > label input[type="radio"] {
+    width: auto; /* ラジオボタンの幅を自動に */
+    margin-right: 5px; /* インプットとテキストの間隔 */
+}
+
+
+/* 問題設定コンテナ */
+.questions-container {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.questions-container h3 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+/* 個々の問題フォーム */
+.question-item-form {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.question-header-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.question-header-form h4 {
+    margin: 0;
+    color: #34495e;
+    font-size: 20px;
+}
+
+/* 問題削除ボタン */
+.remove-question-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 18px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* フォントサイズを統一 */
+    min-width: 80px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    transition: background-color 0.3s ease;
+}
+
+.remove-question-btn:hover {
+    background-color: #c0392b;
+}
+
+/* 問題追加ボタン */
+.add-question-btn {
+    background-color: #2ecc71; /* 緑色 */
+    color: white;
+    border: none;
+    padding: 12px 20px; /* パディングを統一 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* フォントサイズを統一 */
+    min-width: 100px; /* ボタンの最小幅を統一 */
+    text-align: center; /* テキストを中央揃え */
+    display: block; /* 独立したブロックに */
+    margin: 20px auto 0; /* 中央寄せ */
+    transition: background-color 0.3s ease;
+}
+
+.add-question-btn:hover {
+    background-color: #27ae60;
+}
+
+/* 既存の .input-group, input[type="text"], textarea, radio button スタイルは流用されます */
+/* 選択肢の入力グループは既存の .choice-input-group が適用されますが、微調整が必要かもしれません */
+
+/* ラジオボタンの調整 (もし必要であれば) */
+.question-item-form .input-group > div > label {
+    margin-right: 25px; /* ラジオボタン間のスペースを少し広げる */
+}
