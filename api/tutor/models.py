@@ -58,7 +58,8 @@ class Homework(models.Model):
     title = models.CharField(max_length=255, verbose_name="課題名")
     due_date = models.DateField(verbose_name="提出期限")
     # 課題を作成した講師
-    tutor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_homeworks', verbose_name="作成者(講師)")
+    # ここを一時的にnullを許容するように変更
+    tutor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_homeworks', verbose_name="作成者(講師)", null=True, blank=True)
     # 課題の現在のステータス
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', verbose_name="ステータス")
     # 課題に添付されるファイル (optional)
@@ -104,7 +105,8 @@ class StudentHomeworkSubmission(models.Model):
     """
     homework = models.ForeignKey(Homework, on_delete=models.CASCADE, related_name='submissions', verbose_name="提出課題")
     # 提出した生徒
-    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='submitted_homeworks', verbose_name="提出生徒")
+    # ここを一時的にnullを許容するように変更
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='submitted_homeworks', verbose_name="提出生徒", null=True, blank=True)
     submitted_at = models.DateTimeField(auto_now_add=True, verbose_name="提出日時")
     # 生徒が課題に添付したファイル (optional)
     student_attachment = models.FileField(upload_to='student_submissions/', blank=True, null=True, verbose_name="生徒提出ファイル")
@@ -113,11 +115,14 @@ class StudentHomeworkSubmission(models.Model):
     class Meta:
         verbose_name = "生徒課題提出"
         verbose_name_plural = "生徒課題提出"
-        unique_together = ('homework', 'student') # 同じ生徒が同じ課題を複数回提出しないようにする
+        # unique_together = ('homework', 'student') # 同じ生徒が同じ課題を複数回提出しないようにする
+        # null=Trueにするため、unique_togetherの制約を一時的にコメントアウト
+        # 必要に応じて、Null値を考慮したユニーク制約を別途設定する
         ordering = ['-submitted_at']
 
     def __str__(self):
-        return f"{self.student.username} の {self.homework.title} 提出"
+        # studentがnullの場合の表示を考慮
+        return f"{self.student.username if self.student else 'Unknown User'} の {self.homework.title} 提出"
 
 class StudentAnswer(models.Model):
     """
@@ -142,7 +147,8 @@ class TutorGrading(models.Model):
     """
     submission = models.OneToOneField(StudentHomeworkSubmission, on_delete=models.CASCADE, related_name='grading', verbose_name="関連提出")
     # 採点した講師
-    tutor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='graded_submissions', verbose_name="採点者(講師)")
+    # ここを一時的にnullを許容するように変更
+    tutor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='graded_submissions', verbose_name="採点者(講師)", null=True, blank=True)
     score = models.CharField(max_length=50, blank=True, null=True, verbose_name="点数/評価") # 例: '80点', 'A', '未採点'
     feedback = models.TextField(blank=True, null=True, verbose_name="フィードバック")
     graded_at = models.DateTimeField(auto_now_add=True, verbose_name="採点日時")
@@ -152,4 +158,5 @@ class TutorGrading(models.Model):
         verbose_name_plural = "講師採点"
 
     def __str__(self):
-        return f"{self.submission.homework.title} の採点 ({self.submission.student.username})"
+        # tutorがnullの場合の表示を考慮
+        return f"{self.submission.homework.title} の採点 ({self.submission.student.username if self.submission.student else 'Unknown User'})"

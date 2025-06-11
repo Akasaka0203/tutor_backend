@@ -138,7 +138,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Django REST Framework の設定
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication', # セッションベース認証
+        #'rest_framework.authentication.SessionAuthentication', # セッションベース認証
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny', # 開発中は一時的にすべてのAPIを許可。本番では変更すること。

@@ -2,7 +2,9 @@
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import LoginView, LessonScheduleViewSet, HomeworkViewSet, StudentHomeworkSubmissionViewSet # LoginViewもインポート
+from .views import LoginView, LessonScheduleViewSet, HomeworkViewSet, StudentHomeworkSubmissionViewSet
+from django.conf.urls.static import static
+from django.conf import settings # LoginViewもインポート
 # from django.conf import settings # メディアファイルサービング用 (開発用なので不要なら削除)
 # from django.conf.urls.static import static # メディアファイルサービング用 (開発用なので不要なら削除)
 
@@ -26,6 +28,5 @@ urlpatterns = [
     # path('api/tutor/', include('api.tutor.urls')), 
 ]
 
-# 開発環境でメディアファイルをサーブするための設定 (必要であれば残す)
-# if settings.DEBUG:
-#    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
